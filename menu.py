@@ -3,17 +3,8 @@ import streamlit as st
 def authenticated_menu():
     # Show a navigation menu for authenticated users
     st.sidebar.page_link("pages/1_Home_Page.py", label="Home")
-    st.sidebar.page_link("pages/2_Match_Center.py", label="Match Center")
-    st.sidebar.page_link("pages/3_Season_Statistics.py", label="Season Statistics")
-    st.sidebar.page_link("pages/4_Team_Detailed.py", label="Team Detailed")
-    st.sidebar.page_link("pages/5_Player_Detailed.py", label="Player Detailed")
-    st.sidebar.page_link("pages/6_Player_Search.py", label="Player Search")
-    st.sidebar.page_link("pages/7_Plotting_xG.py", label="Plotting xG")
-    st.sidebar.page_link("pages/8_Plotting_Passing_Network.py", label="Plotting Passing Network")
-    st.sidebar.page_link("pages/9_Excel-to-XML_Converter.py", label="Excel-to-XML Converter")
-    st.sidebar.page_link("pages/10_Waktu_Efektif.py", label="Waktu Efektif")
-    st.sidebar.page_link("pages/11_Plotting_Tool.py", label="Plotting Tool")
-    st.sidebar.page_link("pages/12_Log_Out.py", label="Log Out")
+    st.sidebar.page_link("pages/2_Weekly_Data.py", label="Weekly Data")
+    st.sidebar.page_link("pages/3_Log_Out.py", label="Log Out")
 
 def unauthenticated_menu():
     # Show a navigation menu for unauthenticated users
