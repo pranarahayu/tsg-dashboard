@@ -54,3 +54,19 @@ def progpass(data):
   dfy = dfy[dfy['Type']=='Progressive'].sort_values(by='X1', ascending=False).reset_index(drop=True)
 
   return dfx, dfy
+
+def thirddata(data):
+  dfx = data.copy()
+  dfx = dfx[dfx['Action']=='passing']
+  dfx['Ket.'] = 'basic'
+
+  condition = (dfx['Pas Zone'].str.contains("5|6", na=False)) & (dfx['Act Zone'].str.contains("1|2|3|4", na=False))
+  dfx.loc[condition, 'Ket.'] = '3rd'
+
+  dfx = dfx[['Act Name','Team','Match','Action','X1','Y1','X2','Y2','Ket.']]
+
+  dfy = dfx.groupby(['Act Name','Team','Match','Ket.'], as_index=False).count()
+  dfy = dfy[['Act Name','Team','Match','Ket.','Action']]
+  dfy = dfy[dfy['Ket.']=='3rd'].sort_values(by='Action', ascending=False).reset_index(drop=True)
+
+  return dfx, dfy
