@@ -26,7 +26,7 @@ with col1:
     all_gws = st.checkbox('Select All GWs', key='5')
 if all_gws:
     with col2:
-        team = st.selectbox('Select Team', pd.unique(temp['Team']), key='1')
+        team = st.selectbox('Select Team', pd.unique(df2['Team']), key='1')
         temp = temp[temp['Team']==team].reset_index(drop=True)
 else:
     temp = df2[df2['Gameweek']==gw].reset_index(drop=True)
