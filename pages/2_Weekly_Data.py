@@ -23,10 +23,15 @@ df2 = load_data(st.secrets["timeline"])
 col1, col2 = st.columns(2)
 with col1:
     gw = st.selectbox('Select GW', pd.unique(df2['Gameweek']), key='2')
-    #all_gws = st.checkbox('Select All GWs', key='5')
+    all_gws = st.checkbox('Select All GWs', key='5')
+if all_gws:
+    with col2:
+        team = st.selectbox('Select Team', pd.unique(temp['Team']), key='1')
+        temp = temp[temp['Team']==team].reset_index(drop=True)
+else:
     temp = df2[df2['Gameweek']==gw].reset_index(drop=True)
-with col2:
-    mat = st.selectbox('Select Match', pd.unique(temp['Match']), key='3')
-temp = temp[temp['Match']==mat].reset_index(drop=True)
+    with col2:
+        mat = st.selectbox('Select Match', pd.unique(temp['Match']), key='3')
+        temp = temp[temp['Match']==mat].reset_index(drop=True)
 
 st.write(temp)
