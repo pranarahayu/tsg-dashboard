@@ -18,12 +18,15 @@ def load_data(sheets_url):
     xlsx_url = sheets_url.replace("/edit#gid=", "/export?format=xlsx&gid=")
     return pd.read_excel(xlsx_url)
 df = load_data(st.secrets["matchdata"])
+df2 = load_data(st.secrets["timeline"])
 
 col1, col2 = st.columns(2)
 with col1:
-    gw = st.selectbox('Select GW', [1,2,3,4], key='2')
-    all_gws = st.checkbox('Select All GWs', key='5')
+    gw = st.selectbox('Select GW', pd.unique(df2['Gameweek']), key='2')
+    #all_gws = st.checkbox('Select All GWs', key='5')
+    temp = df2[df2['Gameweek']==gw].reset_index(drop=True)
 with col2:
-    mat = st.selectbox('Select Match', ['Match1','Match2'], key='3')
+    mat = st.selectbox('Select Match', pd.unique(temp['Match']), key='3')
+temp = temp[temp['Match']==mat].reset_index(drop=True)
 
-st.write(df)
+st.write(temp)
