@@ -27,7 +27,7 @@ with col1:
 if all_gws:
     with col2:
         team = st.selectbox('Select Team', pd.unique(df2['Team']), key='1')
-        temp = temp[temp['Team']==team].reset_index(drop=True)
+        temp = df2[df2['Team']==team].reset_index(drop=True)
 else:
     temp = df2[df2['Gameweek']==gw].reset_index(drop=True)
     with col2:
