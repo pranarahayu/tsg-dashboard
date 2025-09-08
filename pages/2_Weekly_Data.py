@@ -9,6 +9,8 @@ from openpyxl import load_workbook
 
 from functions_plot import progressive_plot
 from functions_plot import third_plot
+from functions_data import progpass
+from functions_data import thirddata
 
 st.set_page_config(page_title='Weekly Data', layout='wide')
 st.markdown('# Weekly Data')
@@ -42,6 +44,7 @@ with col3:
     temp = temp[temp['Act Name']==pla].reset_index(drop=True)
 with col4:
     pl = st.selectbox('Select Viz', ['Progressive Pass', 'Pass to Final 3rd'], key='6')
-test = progressive_plot(temp, pla)
+teft = progpass(temp)[0]
+test = progressive_plot(teft, pla)
 st.pyplot(test)
 st.write(temp)
