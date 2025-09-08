@@ -7,6 +7,9 @@ import io
 import openpyxl, yattag
 from openpyxl import load_workbook
 
+from functions_plot import progressive_plot
+from functions_plot import third_plot
+
 st.set_page_config(page_title='Weekly Data', layout='wide')
 st.markdown('# Weekly Data')
 
@@ -33,5 +36,12 @@ else:
     with col2:
         mat = st.selectbox('Select Match', pd.unique(temp['Match']), key='3')
         temp = temp[temp['Match']==mat].reset_index(drop=True)
-
+col3, col4 = st.columns(2)
+with col3:
+    pla = st.selectbox('Select Player', pd.unique(temp['Act Name']), key='7')
+    temp = temp[temp['Act Name']==pla].reset_index(drop=True)
+with col4:
+    pl = st.selectbox('Select Viz', ['Progressive Pass', 'Pass to Final 3rd'], key='6')
+test = progressive_plot(temp, pla)
+st.pyplot(test)
 st.write(temp)
