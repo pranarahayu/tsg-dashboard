@@ -70,3 +70,13 @@ def thirddata(data):
   dfy = dfy[dfy['Ket.']=='3rd'].sort_values(by='Action', ascending=False).reset_index(drop=True)
 
   return dfx, dfy
+
+def chance(data):
+  dfx = data.copy()
+  dfx = df2[(df2['Action']=='key pass') | (df2['Action']=='assist')]
+  dfx = dfx[['Act Name','Team','Match','Action','X1','Y1','X2','Y2']]
+
+  dfy = dfx[['Act Name','Team','X1']].groupby(['Act Name','Team'], as_index=False).count()
+  dfy = dfy.sort_values(by='X1', ascending=False).reset_index(drop=True)
+
+  return dfx, dfy
