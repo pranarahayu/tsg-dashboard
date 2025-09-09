@@ -92,3 +92,35 @@ def third_plot(data, player):
   ax.text(0, -3.5, 'Passes to Final Third', ha='left', fontproperties=reg, color='#000000', size='20', va='center')
 
   return fig
+
+def chance_plot(data, player):
+  dfx = data.copy()
+
+  fig, ax = plt.subplots(figsize=(20, 20), dpi=500)
+  fig.patch.set_facecolor('#FFFFFF')
+  ax.set_facecolor('#FFFFFF')
+  pitch = Pitch(pitch_type='wyscout', pitch_color='#FFFFFF', line_color='#346594',
+                corner_arcs=True, goal_type='circle', linewidth=1.5, pad_bottom=5)
+  pitch.draw(ax=ax)
+
+  dfx = dfx[dfx['Act Name']==player].reset_index(drop=True)
+  for i in range(len(dfx)):
+    if dfx['Action'][i] == 'key pass':
+      pitch.arrows(dfx['X1'][i], dfx['Y1'][i], dfx['X2'][i], dfx['Y2'][i], alpha=0.75,
+                   width=2, headwidth=5, headlength=5, color='#346594', ax=ax)
+    else:
+      pitch.arrows(dfx['X1'][i], dfx['Y1'][i], dfx['X2'][i], dfx['Y2'][i], alpha=0.75,
+                   width=2, headwidth=5, headlength=5, color='#ff0004', ax=ax)
+
+  ax.annotate('-Key Pass->', size=16, xy=(5, 90), xytext=(0,0),
+              textcoords='offset points', color='#346594', ha='left',
+              zorder=9, va='center', fontproperties=reg)
+
+  ax.annotate('-Assist->', size=16, xy=(5, 93), xytext=(0,0),
+              textcoords='offset points', color='#ff0004', ha='left',
+              zorder=9, va='center', fontproperties=reg)
+
+  ax.text(0, -7, player, ha='left', fontproperties=bold, color='#000000', size='28', va='center')
+  ax.text(0, -3.5, 'Chances Created', ha='left', fontproperties=reg, color='#000000', size='20', va='center')
+
+  return fig
