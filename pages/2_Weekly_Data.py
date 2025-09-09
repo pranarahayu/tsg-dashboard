@@ -47,5 +47,5 @@ with col4:
 teft = progpass(temp)[0]
 rak = progpass(temp)[1]
 test = progressive_plot(teft, pla)
-st.write(rank.head(10))
+st.write(rak.head(10))
 st.pyplot(test)
