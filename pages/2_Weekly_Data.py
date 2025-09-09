@@ -45,7 +45,7 @@ with col3:
 with col4:
     pl = st.selectbox('Select Viz', ['Progressive Pass', 'Pass to Final 3rd'], key='6')
 teft = progpass(temp)[0]
-rak = progpass(temp)[1]
+rak = progpass(df2)[1]
 test = progressive_plot(teft, pla)
 st.write(rak.head(10))
 st.pyplot(test)
