@@ -4,7 +4,8 @@ def authenticated_menu():
     # Show a navigation menu for authenticated users
     st.sidebar.page_link("pages/1_Home_Page.py", label="Home")
     st.sidebar.page_link("pages/2_Weekly_Data.py", label="Weekly Data")
-    st.sidebar.page_link("pages/3_Log_Out.py", label="Log Out")
+    st.sidebar.page_link("pages/3_Review.py", label="Review")
+    st.sidebar.page_link("pages/4_Log_Out.py", label="Log Out")
 
 def unauthenticated_menu():
     # Show a navigation menu for unauthenticated users
