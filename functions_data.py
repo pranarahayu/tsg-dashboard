@@ -81,10 +81,12 @@ def chance(data):
 
   return dfx, dfy
 
-def gendata(data1, data2, gw):
-  gw_list = gw
+def gendata(data1, data2):
+  #fin = pd.DataFrame()
+  #gw_list = gw
   df = data1.copy()
-  df = df[df['Gameweek'].isin(gw)]
+  #df = df[df['Gameweek'].isin(gw)]
+  #mac = df['Match'].unique().tolist()
   db = data2.copy()
 
   st = ['Match','Result','Gameweek','Date','Venue']
@@ -156,5 +158,19 @@ def gendata(data1, data2, gw):
   nu_data = nu_data[metriks]
 
   datas = pd.merge(st_data, nu_data, on=['Match'], how='left')
+  #fin = pd.concat([fin, datas], ignore_index=True)
 
   return datas
+
+def findata(data1, data2, gw):
+  gw_list = gw
+  df = data1.copy()
+  db = data2.copy()
+  df = df[df['Gameweek'].isin(gw)]
+  mac = df['Match'].unique().tolist()
+  fin = pd.DataFrame()
+  for i in mac:
+    data = df[df['Match']==i]
+    temp = gendata(data, db)
+    fin = pd.concat([fin, temp], ignore_index=True)
+  return fin
