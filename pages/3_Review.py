@@ -44,6 +44,6 @@ with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
 download = st.download_button(
     label="Download data as Excel",
     data=buffer.getvalue(),
-    file_name='Match Analysis Data ('+date+').xlsx',
+    file_name='Match Analysis Data.xlsx',
     mime='application/vnd.ms-excel', key = 1)
 st.write(data)
