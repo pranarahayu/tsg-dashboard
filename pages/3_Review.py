@@ -38,12 +38,4 @@ with col4:
   ven = st.multiselect('Select Venue', ['Home', 'Away'], key='3')
 
 data = findata(df, db, pekan)
-buffer = io.BytesIO()
-with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-    data.to_excel(writer, sheet_name='Sheet1', index=False)
-download = st.download_button(
-    label="Download data as Excel",
-    data=buffer.getvalue(),
-    file_name='Match Analysis Data.xlsx',
-    mime='application/vnd.ms-excel', key = 1)
 st.write(data)
