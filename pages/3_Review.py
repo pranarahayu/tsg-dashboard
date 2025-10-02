@@ -40,10 +40,10 @@ with col4:
 data = findata(df, db, pekan)
 buffer = io.BytesIO()
 with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-    show_player_data.to_excel(writer, sheet_name='Sheet1', index=False)
+    data.to_excel(writer, sheet_name='Sheet1', index=False)
 download = st.download_button(
     label="Download data as Excel",
     data=buffer.getvalue(),
-    file_name='player-data_downloaded ('+date+').xlsx',
+    file_name='Match Analysis Data ('+date+').xlsx',
     mime='application/vnd.ms-excel', key = 1)
 st.write(data)
