@@ -1,6 +1,14 @@
 import streamlit as st
 import pandas as pd
 from datetime import date, timedelta
+import sys
+import io
+import numpy as np
+from tempfile import NamedTemporaryFile
+import urllib
+
+from functions_data import gendata
+from functions_data import findata
 
 st.set_page_config(page_title='Review', layout='wide')
 st.markdown('# Review')
@@ -28,3 +36,14 @@ with col3:
 
 with col4:
   ven = st.multiselect('Select Venue', ['Home', 'Away'], key='3')
+
+data = findata(df, db, pekan)
+buffer = io.BytesIO()
+with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+    show_player_data.to_excel(writer, sheet_name='Sheet1', index=False)
+download = st.download_button(
+    label="Download data as Excel",
+    data=buffer.getvalue(),
+    file_name='player-data_downloaded ('+date+').xlsx',
+    mime='application/vnd.ms-excel', key = 1)
+st.write(data)
