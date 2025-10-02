@@ -14,6 +14,7 @@ def load_data(sheets_url):
     return pd.read_excel(xlsx_url)
 df = load_data(st.secrets["matchdata"])
 df2 = load_data(st.secrets["timeline"])
+db = load_data(st.secrets["dbase"])
 
 col1, col2, col3, col4 = st.columns(4)
 with col1:
