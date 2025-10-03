@@ -96,10 +96,9 @@ def gendata(data1, data2):
   st_data['Away Team'] = st_data['Match'].str.split(' - ').str[1]
   st_data['Home Score'] = st_data['Result'].str.split(' - ').str[0]
   st_data['Away Score'] = st_data['Result'].str.split(' - ').str[1]
-  st_data['KO Time'] = st_data['Date'].str.split(' 1').str[1]
-  st_data['KO Time'] = '1'+st_data['KO Time']
-  st_data['Date'] = st_data['Date'].str.split(' 1').str[0]
   st_data['Date'] = pd.to_datetime(st_data['Date'])
+  st_data['Match Date'] = st_data['Date'].dt.date
+  st_data['KO Time'] = st_data['Date'].dt.time
   st_data['Day'] = st_data['Date'].dt.day_name()
   st_data['Week'] = ''
   for i in range(len(st_data)):
@@ -107,7 +106,7 @@ def gendata(data1, data2):
       st_data['Week'][i] = 'W-0'+str(st_data['Gameweek'][i])
     else:
       st_data['Week'][i] = 'W-'+str(st_data['Gameweek'][i])
-  st_data = st_data[['Match','Home Team','Away Team','Home Score','Away Score','Week','Day','Date','KO Time','Venue']]
+  st_data = st_data[['Match','Home Team','Away Team','Home Score','Away Score','Week','Day','Match Date','KO Time','Venue']].rename(columns={'Match Date':'Date'})
 
   nu = ['Match','Home/Away','Shot on','Shot off','Shot Blocked','Pass','Pass Fail',
         'Corner','Tackle','Offside','Own Goal','Foul','Yellow Card','Red Card']
