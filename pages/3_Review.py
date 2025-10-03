@@ -42,5 +42,5 @@ buffer = io.BytesIO()
 with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
     datas.to_excel(writer, sheet_name='Sheet1', index=False)
 download = st.download_button(label="Download data as Excel", data=buffer.getvalue(),
-                              file_name='Match-Data.xlsx', mime='application/vnd.ms-excel', key = 1)
+                              file_name='Match-Data.xlsx', mime='application/vnd.ms-excel')
 st.write(datas)
