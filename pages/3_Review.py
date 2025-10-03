@@ -24,20 +24,17 @@ df = load_data(st.secrets["matchdata"])
 df2 = load_data(st.secrets["timeline"])
 db = load_data(st.secrets["dbase"])
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2 = st.columns(2)
 with col1:
-  komp = st.selectbox('Select Competition', ['Liga 1', 'Liga 2'], key='0')
-
+    komp = st.selectbox('Select Competition', ['Super League', 'Championship'], key='0')
+    temp = df[df['Kompetisi']==komp].reset_index(drop=True)
 with col2:
-  pekan = st.multiselect('Select Gameweek', pd.unique(df['Gameweek']), key='1')
+    pekan = st.multiselect('Select Gameweek', pd.unique(df['Gameweek']), key='1')
+    all_gws = st.checkbox('Select All GWs', key='2')
+if all_gws:
+    pekan = df['Gameweek'].unique().tolist()
 
-with col3:
-  klub = st.selectbox('Select Club', pd.unique(df['Team']), key='2')
-
-with col4:
-  ven = st.multiselect('Select Venue', ['Home', 'Away'], key='3')
-
-datas = findata(df, db, pekan)
+datas = findata(temp, db, pekan)
 buffer = io.BytesIO()
 with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
     datas.to_excel(writer, sheet_name='Sheet1', index=False)
