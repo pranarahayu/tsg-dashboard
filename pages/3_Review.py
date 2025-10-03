@@ -29,7 +29,7 @@ with col1:
     komp = st.selectbox('Select Competition', ['Super League', 'Championship'], key='0')
     temp = df[df['Kompetisi']==komp].reset_index(drop=True)
 with col2:
-    pekan = st.multiselect('Select Gameweek', pd.unique(df['Gameweek']), key='1')
+    pekan = st.multiselect('Select Gameweek', pd.unique(temp['Gameweek']), key='1')
     all_gws = st.checkbox('Select All GWs', key='2')
 if all_gws:
     pekan = df['Gameweek'].unique().tolist()
