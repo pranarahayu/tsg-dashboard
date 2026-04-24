@@ -10,7 +10,7 @@ import urllib
 from functions_data import gendata
 from functions_data import findata
 
-st.set_page_config(page_title='Review', layout='wide')
+st.set_page_config(page_title='Raw Data Download', layout='wide')
 st.markdown('# Review')
 
 from menu import menu
@@ -44,4 +44,4 @@ with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
     datas.to_excel(writer, sheet_name='Sheet1', index=False)
 download = st.download_button(label="Download data as Excel", data=buffer.getvalue(),
                               file_name=jns+'_'+komp+'.xlsx', mime='application/vnd.ms-excel')
-st.write(datas, ignore_index=True)
+st.write(datas)
