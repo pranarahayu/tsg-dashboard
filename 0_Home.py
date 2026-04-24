@@ -7,7 +7,7 @@ from datetime import datetime
 # Create an empty container
 placeholder = st.empty()
 
-#actual_email = "email"
+actual_email = "tsg-ileague"
 actual_password = "ileague2025"
 
 # Insert a form in the container
@@ -17,7 +17,7 @@ with placeholder.form("login"):
     password = st.text_input("Password", type="password")
     submit = st.form_submit_button("Login")
 
-if submit and password == actual_password:
+if submit and password == actual_password and email == actual_email:
     # If the form is submitted and the email and password are correct,
     # clear the form/container and display a success message
     placeholder.empty()
