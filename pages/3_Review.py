@@ -28,16 +28,19 @@ db = load_data(st.secrets["dbase"])
 col1, col2, col3 = st.columns(3)
 with col1:
     komp = st.selectbox('Select Competition', ['Super League', 'Championship'], key='0')
-    temp = df[df['Kompetisi']=='komp'].reset_index(drop=True)
 with col2:
     jns = st.selectbox('Select Data', ['Match Data', 'Event Data'], key='3')
 with col3:
-    pekan = st.multiselect('Select Gameweek', pd.unique(temp['Gameweek']), key='1')
+    if komp == 'Super League':
+        pekan = st.multiselect('Select Gameweek', [x for x in range(1,35)]), key='1')
+    else:
+        pekan = st.multiselect('Select Gameweek', [x for x in range(1,28)]), key='4')
     all_gws = st.checkbox('Select All GWs', key='2')
 if all_gws:
     pekan = df['Gameweek'].unique().tolist()
 
 if jns == 'Match Data':
+    temp = df[df['Kompetisi']==komp]
     datas = temp[temp['Gameweek'].isin(pekan)].reset_index(drop=True)
 else:
     if komp == 'Super League':
