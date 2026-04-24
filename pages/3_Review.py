@@ -21,13 +21,14 @@ def load_data(sheets_url):
     xlsx_url = sheets_url.replace("/edit#gid=", "/export?format=xlsx&gid=")
     return pd.read_excel(xlsx_url)
 df = load_data(st.secrets["matchdata"])
-df2 = load_data(st.secrets["timeline"])
+df2 = load_data(st.secrets["timeline_1"])
+df3 = load_data(st.secrets["timeline_2"])
 db = load_data(st.secrets["dbase"])
 
 col1, col2, col3 = st.columns(3)
 with col1:
     komp = st.selectbox('Select Competition', ['Super League', 'Championship'], key='0')
-    temp = df[df['Kompetisi']==komp].reset_index(drop=True)
+    temp = df[df['Kompetisi']=='komp'].reset_index(drop=True)
 with col2:
     jns = st.selectbox('Select Data', ['Match Data', 'Event Data'], key='3')
 with col3:
@@ -35,10 +36,15 @@ with col3:
     all_gws = st.checkbox('Select All GWs', key='2')
 if all_gws:
     pekan = df['Gameweek'].unique().tolist()
+
 if jns == 'Match Data':
-    datas = df
+    datas = df[(df['Kompetisi']==komp) & (df[df['Gameweek'].isin(pekan)])].reset_index(drop=True)
 else:
-    datas = df2
+    if komp == 'Super League'
+        datas = df2[df2['Gameweek'].isin(pekan)].reset_index(drop=True)
+    else:
+        datas = df3[df3['Gameweek'].isin(pekan)].reset_index(drop=True)
+
 buffer = io.BytesIO()
 with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
     datas.to_excel(writer, sheet_name='Sheet1', index=False)
