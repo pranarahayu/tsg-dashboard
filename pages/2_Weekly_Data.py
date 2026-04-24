@@ -12,8 +12,8 @@ from functions_plot import third_plot
 from functions_data import progpass
 from functions_data import thirddata
 
-st.set_page_config(page_title='Weekly Data', layout='wide')
-st.markdown('# Weekly Data')
+st.set_page_config(page_title='Player Radar', layout='wide')
+st.markdown('# Player Radar')
 
 from menu import menu
 menu()
