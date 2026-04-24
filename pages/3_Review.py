@@ -35,9 +35,6 @@ with col3:
         pekan = st.multiselect('Select Gameweek', [x for x in range(1,35)], key='1')
     else:
         pekan = st.multiselect('Select Gameweek', [x for x in range(1,28)], key='4')
-    all_gws = st.checkbox('Select All GWs', key='2')
-if all_gws:
-    pekan = df['Gameweek'].unique().tolist()
 
 if jns == 'Match Data':
     temp = df[df['Kompetisi']==komp]
