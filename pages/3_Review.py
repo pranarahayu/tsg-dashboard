@@ -40,7 +40,7 @@ if all_gws:
 if jns == 'Match Data':
     datas = df[(df['Kompetisi']==komp) & (df[df['Gameweek'].isin(pekan)])].reset_index(drop=True)
 else:
-    if komp == 'Super League'
+    if komp == 'Super League':
         datas = df2[df2['Gameweek'].isin(pekan)].reset_index(drop=True)
     else:
         datas = df3[df3['Gameweek'].isin(pekan)].reset_index(drop=True)
