@@ -7,10 +7,10 @@ import io
 import openpyxl, yattag
 from openpyxl import load_workbook
 
-from functions_plot import progressive_plot
-from functions_plot import third_plot
-from functions_data import progpass
-from functions_data import thirddata
+from functions_data import get_radar
+from functions_data import get_sum90
+from functions_data import get_pct
+from functions_plot import beli_pizza
 
 st.set_page_config(page_title='Player Radar', layout='wide')
 st.markdown('# Player Radar')
@@ -23,8 +23,13 @@ def load_data(sheets_url):
     xlsx_url = sheets_url.replace("/edit#gid=", "/export?format=xlsx&gid=")
     return pd.read_excel(xlsx_url)
 df = load_data(st.secrets["matchdata"])
-df2 = load_data(st.secrets["timeline"])
+dx1 = load_data(st.secrets["timeline_1"])
+dx2 = load_data(st.secrets["timeline_2"])
+#db = load_data(st.secrets["players"])
+#gk = load_data(st.secrets["keepers"])
+#xg = load_data(st.secrets["xgdata"])
 
+'''
 col1, col2 = st.columns(2)
 with col1:
     gw = st.selectbox('Select GW', pd.unique(df2['Gameweek']), key='2')
@@ -49,3 +54,4 @@ rak = progpass(df2)[1]
 test = progressive_plot(teft, pla)
 st.write(rak.head(10))
 st.pyplot(test)
+'''
