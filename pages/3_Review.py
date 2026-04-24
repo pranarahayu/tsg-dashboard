@@ -44,4 +44,4 @@ with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
     datas.to_excel(writer, sheet_name='Sheet1', index=False)
 download = st.download_button(label="Download data as Excel", data=buffer.getvalue(),
                               file_name=jns+'_'+komp+'.xlsx', mime='application/vnd.ms-excel')
-st.write(datas)
+st.write(datas, index=False)
