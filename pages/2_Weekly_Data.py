@@ -72,30 +72,3 @@ with open('pizza.jpg', 'rb') as img:
   fn = 'Perf.Radar_'+ply+'.jpg'
   btn = st.download_button(label="Download Report as a Radar!", data=img,
                            file_name=fn, mime="image/jpg")
-
-'''
-col1, col2 = st.columns(2)
-with col1:
-    gw = st.selectbox('Select GW', pd.unique(df2['Gameweek']), key='2')
-    all_gws = st.checkbox('Select All GWs', key='5')
-if all_gws:
-    with col2:
-        team = st.selectbox('Select Team', pd.unique(df2['Team']), key='1')
-        temp = df2[df2['Team']==team].reset_index(drop=True)
-else:
-    temp = df2[df2['Gameweek']==gw].reset_index(drop=True)
-    with col2:
-        mat = st.selectbox('Select Match', pd.unique(temp['Match']), key='3')
-        temp = temp[temp['Match']==mat].reset_index(drop=True)
-col3, col4 = st.columns(2)
-with col3:
-    pla = st.selectbox('Select Player', pd.unique(temp['Act Name']), key='7')
-    temp = temp[temp['Act Name']==pla].reset_index(drop=True)
-with col4:
-    pl = st.selectbox('Select Viz', ['Progressive Pass', 'Pass to Final 3rd'], key='6')
-teft = progpass(temp)[0]
-rak = progpass(df2)[1]
-test = progressive_plot(teft, pla)
-st.write(rak.head(10))
-st.pyplot(test)
-'''
