@@ -365,7 +365,7 @@ def get_sum90(report, tl, xg, db, gk, min):
   df_sum = pd.merge(df_sum, gk, on='Name', how='outer')
 
   df_sum.replace([np.inf, -np.inf], 0, inplace=True)
-  df_sum.fillna(0, inplace=True)
+  #df_sum.fillna(0, inplace=True)
 
   temp = df_sum.drop(['Name','Team'], axis=1)
 
