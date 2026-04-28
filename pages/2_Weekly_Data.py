@@ -23,11 +23,25 @@ def load_data(sheets_url):
     xlsx_url = sheets_url.replace("/edit#gid=", "/export?format=xlsx&gid=")
     return pd.read_excel(xlsx_url)
 df = load_data(st.secrets["matchdata"])
-dx1 = load_data(st.secrets["timeline_1"])
-dx2 = load_data(st.secrets["timeline_2"])
+#dx1 = load_data(st.secrets["timeline_1"])
+#dx2 = load_data(st.secrets["timeline_2"])
 #db = load_data(st.secrets["players"])
 #gk = load_data(st.secrets["keepers"])
 #xg = load_data(st.secrets["xgdata"])
+
+komp = st.selectbox('Select Competition', ['Super League','Championship'], key='123')
+if komp == 'Super League':
+    df = df[df['Kompetisi']=='Super League'].reset_index(drop=True)
+    dx = load_data(st.secrets["timeline_1"])
+    db = load_data(st.secrets["players_1"])
+    gk = load_data(st.secrets["keepers_1"])
+    xg = load_data(st.secrets["xgdata_1"])
+else:
+    df = df[df['Kompetisi']=='Championship'].reset_index(drop=True)
+    dx = load_data(st.secrets["timeline_2"])
+    db = load_data(st.secrets["players_2"])
+    gk = load_data(st.secrets["keepers_2"])
+    xg = load_data(st.secrets["xgdata_2"])
 
 col1, col2, col3, col4 = st.columns(4)
 with col1:
